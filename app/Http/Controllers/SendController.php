@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 use App\Models\Association;
 use App\Models\Education;
 use App\Models\Profile;
 use App\Models\Work_Experience;
 use App\Models\Work_Myprofile_Detail;
-use App\Models\Work_Myprofile_Detail_Experience;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class SendController extends Controller
 {
@@ -42,12 +43,24 @@ class SendController extends Controller
      */
     public function show($user_id)
     {
-        $profile = $user_id
+        $profile = User::query()
+        ->find(Auth::user()->id)
         ->userprofile()
         ->first();
 
-        return response()->view('send.show', compact('profile'));
+        return response()->view('pages.send.accept', compact('profile'));
     }
+
+    public function accept($user_id)
+    {
+        $profile = User::query()
+        ->find($user_id)
+        ->userprofile()
+        ->first();
+
+        return response()->view('pages.send.accept', compact('profile'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

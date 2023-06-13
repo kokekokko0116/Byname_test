@@ -1,3 +1,7 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
+
 <!-- resources/views/tweet/index.blade.php -->
 
 <x-app-layout>
@@ -7,7 +11,7 @@
     </h2>
   </x-slot>
 
-  <a href="{{ route('send.show', ['user_id' => 1]) }}">
+  <a href="{{ route('send.show', Auth::user()->id )}}">
     <p class="text-left text-gray-dark dark:text-gray-200">ハイパーリンク</p>
   </a>
 

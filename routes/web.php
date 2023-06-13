@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('work_myprofile', WorkMyprofileController::class);
 });
 
+Route::get('send/accept/{user_id}', [SendController::class, 'accept'])->name('send.accept');
+
 Route::get('/', function () {
     return view('welcome');
 });
